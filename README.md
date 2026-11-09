@@ -29,7 +29,7 @@ An enterprise-grade multi-step onboarding wizard architected for modern SaaS and
 
 ## 🚀 Live Demo & QA Video Outline
 
-- **Live URL**: Deployed to Vercel (see [Deployment Guide](#-deployment-guide))
+- **Live URL**: [GitHub Pages](https://ayushi-cse.github.io/registration-wizard/)
 - **QA Demo Video**: 3-minute recording walkthrough covering real-time error messages, the "Back" button retaining state, and the DevTools console payload output.
 
 ### 3-Minute QA Recording Script
