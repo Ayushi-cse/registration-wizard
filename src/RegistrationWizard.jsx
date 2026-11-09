@@ -261,6 +261,9 @@ export default function RegistrationWizard() {
 
     setFormArchitecture(newMode);
   };
+
+  // Reset wizard handler
+  const handleReset = () => {
     setClassicFormData(INITIAL_FORM_VALUES);
     setClassicErrors({});
     rhfReset(INITIAL_FORM_VALUES);
