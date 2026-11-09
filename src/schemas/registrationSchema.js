@@ -41,30 +41,30 @@ export const stepOneSchema = z.object({
 /**
  * Step 2 Schema: Account Details
  */
-export const stepTwoSchema = z
-  .object({
-    email: z
-      .string()
-      .trim()
-      .min(1, 'Email address is required')
-      .refine((val) => val.includes('@'), {
-        message: 'Email must contain an "@" symbol',
-      })
-      .refine((val) => EMAIL_REGEX.test(val), {
-        message: 'Please enter a valid email format (e.g., alex@company.com)',
-      }),
-    password: z
-      .string()
-      .min(1, 'Password is required')
-      .min(8, 'Password must be at least 8 characters long'),
-    confirmPassword: z
-      .string()
-      .min(1, 'Please confirm your password'),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords must strictly match',
-    path: ['confirmPassword'],
-  });
+const stepTwoFields = z.object({
+  email: z
+    .string()
+    .trim()
+    .min(1, 'Email address is required')
+    .refine((val) => val.includes('@'), {
+      message: 'Email must contain an "@" symbol',
+    })
+    .refine((val) => EMAIL_REGEX.test(val), {
+      message: 'Please enter a valid email format (e.g., alex@company.com)',
+    }),
+  password: z
+    .string()
+    .min(1, 'Password is required')
+    .min(8, 'Password must be at least 8 characters long'),
+  confirmPassword: z
+    .string()
+    .min(1, 'Please confirm your password'),
+});
+
+export const stepTwoSchema = stepTwoFields.refine((data) => data.password === data.confirmPassword, {
+  message: 'Passwords must strictly match',
+  path: ['confirmPassword'],
+});
 
 /**
  * Full Registration Unified Schema for Step 3 Submission
@@ -74,9 +74,7 @@ export const registrationSchema = z
     firstName: stepOneSchema.shape.firstName,
     lastName: stepOneSchema.shape.lastName,
     dateOfBirth: stepOneSchema.shape.dateOfBirth,
-    email: stepTwoSchema.shape.email,
-    password: stepTwoSchema.shape.password,
-    confirmPassword: stepTwoSchema.shape.confirmPassword,
+    ...stepTwoFields.shape,
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Passwords must strictly match',

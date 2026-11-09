@@ -145,6 +145,10 @@ registration-wizard/
 
 ## 🌐 Deployment Guide
 
+### Deploying to GitHub Pages
+
+Pushing to `main` automatically builds and deploys the app to `https://ayushi-cse.github.io/registration-wizard/` using GitHub Actions. The Vite configuration applies the repository path only in the GitHub Actions build; local development remains available at `/`.
+
 ### Deploying to Vercel
 
 1. Push your repository to GitHub.
